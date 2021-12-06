@@ -1,0 +1,22 @@
+{
+    "name":"Pollinate the flowers",
+    "short_name": "Shoot",
+    "icons": [ 
+        { "src": "assets/img/png/beehive512.png",
+        "sizes":"512x512",
+        "type": "image/png",
+        "purpose": "any maskable"},
+        { "src": "assets/img/png/beehive192.png",
+        "sizes":"192x192",
+        "type": "image/png",
+        "purpose": "any maskable"},
+        { "src": "assets/img/png/beehive144.png",
+        "sizes":"144x144",
+        "type": "image/png",
+        "purpose": "any maskable"}
+    ],
+    "start_url" : "/index.html",
+    "display" : "standalone",
+    "background_color": "#eee",
+    "theme_color":"#FF849A"
+}
