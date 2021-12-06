@@ -1,0 +1,456 @@
+@import "lib/vars";
+@import "lib/reboot";
+@import "lib/keyframes";
+@import "lib/fontface";
+@import "lib/colors";
+@import "lib/typo";
+@import "lib/utils";
+
+
+$height_layout: 100vh;
+$width_layout: 100vw;
+html,
+body {
+    background-color: #eee;
+}
+
+/*
+ * Estilos para el layout general
+ *
+ * Si quieres aprender más sobre SCSS: 
+ * https://www.youtube.com/playlist?list=PLn4HfBF-ETRsrE-AUpp2c4LpoNsK15X0d
+ * y en 45 minutos eres experto/a en SCSS
+ *
+ */
+// La maquetación más general te la damos hecha para que no sea un ejercicio muy largo
+// Recuerda que puedes cambiar lo que quieras.
+// hemos puesto algunas pistas en el código que te pueden ayudar...
+// Mucha suerte!!
+
+.layout {
+    height: 100vh;
+    width: 100vw;
+    max-width: 500px;
+    overflow: auto;
+    background-color: #eee;
+    box-shadow: 0 0 86px rgba(0, 0, 0, .15);
+
+    &.home {
+        display: grid;
+        grid-template-rows: auto 1fr auto auto;
+        grid-template-columns: 100%;
+
+        header {
+            grid-area: 1 / 1 / span 1 / -1;
+        }
+
+        main {
+            grid-area: 2 / 1 / span 1 / -1;
+        }
+
+        .main_navigation {
+            grid-area: 3 / 1 / span 1 / -1;
+        }
+
+        .secondary_navigation {
+            grid-area: 4 / 1 / span 1 / -1;
+        }
+    }
+
+    &.single_page {
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        grid-template-columns: 100%;
+
+        header {
+            grid-area: 1 / 1 / span 1 / -1;
+        }
+
+        main {
+            grid-area: 2 / 1 / span 1 / -1;
+        }
+
+        footer {
+            grid-area: 3 / 1 / span 1 / -1;
+        }
+    }
+
+    &.game {
+        display: grid;
+        grid-template-rows: auto 1fr;
+        grid-template-columns: 100%;
+
+        .ui {
+            grid-area: 1 / 1 / span 1 / -1;
+        }
+
+        .game_container {
+            grid-area: 2 / 1 / span 1 / -1;
+        }
+
+        .modal_window {
+            grid-area: 1 / 1 / -1 / -1;
+        }
+    }
+
+
+    @media screen and (min-width: 500px) {
+        border-radius: 10px;
+        overflow: hidden;
+        margin: 2rem auto;
+        height: calc(100vh - 4rem);
+        $height_layout: calc(100vh - 4rem);
+    }
+
+    @media screen and (max-height: 600px) and (min-width: 500px){
+        border-radius: 10px;
+        overflow: hidden;
+        margin: 2rem auto;
+        height: calc(100vh - 4rem);
+        width: calc(100vh * 0.6);
+        $width: calc(100vh * 0.6);
+        $height_layout:calc(100vh - 4rem);
+    }
+    
+}
+
+
+/*
+ *
+ * Estilos para la página home
+ *
+ */
+.home {
+    
+    header {
+
+        h1 {
+            color:black;
+            margin-top: 7vh;
+            text-align: center;
+            font-size:xx-large;
+            font-weight: bold;
+        }
+
+        h2 {}
+    }
+
+    main {
+        background-color: #eee;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+
+        .slider {
+            margin: 2rem 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+
+    .main_navigation {
+        justify-content: center;
+        display:flex;
+        margin-bottom: 20px;
+    }
+
+    .secondary_navigation {
+        justify-content: center;
+        display:flex;
+        margin-bottom: 10px;
+    }
+}
+
+/*
+ *
+ * Estilos para la página highscores
+ *
+ */
+.single_page {
+    background-color: white;
+    header {
+        
+        h2 {
+            display: flex;
+            justify-content: center;
+            padding: 2rem 0rem 0rem;
+            .icon {}
+
+            .label {}
+        }
+    }
+
+    main {
+        
+        max-height: calc(5* $height_layout);
+        overflow: hidden;
+        section {
+            
+
+            h3 {
+                padding: 2rem 1rem 0rem 1rem;
+            }
+
+            .big_scores {
+                position: relative; // swiper lo va a necesitar... ;)
+                opacity: 0;
+                max-height: 20vh;
+                
+                .big_score {
+                    display: flex;
+                    flex-direction: column;
+                    columns: 1fr 1fr;
+                    align-items: center;
+                    padding: 1rem 1rem 2rem 1rem;
+                    font-size: xx-large;
+                    font-weight: bolder;
+                    border-style: dashed;
+                    border-width: medium;
+                    border-color: #ff849b86;
+                    width: 50%;
+                    
+                    .name{
+                    font-size: small;
+                    margin-top: 4px;
+                    margin-bottom: 0;
+                    }
+                }
+                
+            
+                
+            }
+
+            .swiper-pagination-bullet-active {
+                // swiper lo va a necesitar... ;)
+                background-color: #ff849b86;
+            }
+
+            .leaderboard_items {
+                padding: 0rem 1rem;
+                .leaderboard_item {
+                    opacity: 0;
+                    display: flex;
+                    padding: 10px;
+                    justify-content: space-between;
+                    .number {}
+
+                    .date {}
+
+                    .score {
+                        font-weight: bolder;
+                    }
+
+                    &:first-child {
+                        background-color: #ff849b86;
+                        border-radius: 20px;
+                    }
+                }
+            }
+        }
+    }
+
+    footer {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+}
+
+
+/*
+ * Botones
+ */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    padding: 1rem 5rem;
+    border-radius: 7px;
+    
+
+    &:hover,
+    &:visited,
+    &:link {
+        color: inherit;
+    }
+
+    &:focus {
+        outline: 0;
+    }
+
+    &:hover,
+    &:focus {
+        box-shadow: 0 0 0 3px pink;
+        font-weight: bold;
+    }
+
+    &.btn_primary {
+        background-color: #FF849A;
+        
+
+        &:hover,
+        &:focus {}
+    }
+
+    &.btn_link {
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: #F2F2F2;
+        border: 1px solid #F2F2F2;
+        color: #525252;
+    }
+}
+
+.secondary_navigation_item {
+    align-items: center;
+    display: flex;
+    margin-bottom: 40px;
+    
+
+    &:hover,
+    &:visited,
+    &:link {
+        color: inherit;
+    }
+
+    .icon {
+        color: gray;
+        padding: 1rem;
+    }
+
+    .label {
+        font-size: medium;
+    }
+}
+
+.game {
+    .ui {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.5rem;
+        background-color: white;
+
+        .lifes,
+        .score {
+            .amount {}
+
+            .icon {}
+        }
+
+        .pause {}
+    }
+
+    .game_container {
+        .game_holder { // te va a ayudar a que funcione el juego ok...
+            position: relative; 
+            height: 100%;
+        }
+    }
+
+    .modal_window {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        visibility: hidden;
+        opacity: 0;
+
+        .overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            background-color: rgba(0, 0, 0, .6);
+        }
+
+        .holder {
+            position:absolute;
+            bottom: 10px;
+            width: 97%;
+            z-index: 3;
+            background-color: #fff;
+            border-radius: 10px;
+
+            .message {
+                padding: 5% 5% 1%;
+            }
+
+            .cta {
+                margin-top: 1rem;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                grid-gap: 1rem;
+                padding: 1%;
+
+                .btn {
+                    justify-content: center;
+                }
+            }
+        }
+
+        &.opened {
+            visibility: visible;
+            opacity: 1;
+        }
+    }
+}
+
+.slider { // una ayuda! :)
+    svg {
+        max-height: 20vh; 
+        overflow: visible;
+
+        /**g.char_01 {
+            transform-origin: 20% 50%;
+        }
+
+        g.char_02 {
+            transform-origin: 50% 50%;
+        }
+
+        g.char_03 {
+            transform-origin: 80% 50%;
+        }
+        **/
+
+        g.area {
+            transition: all 2350ms ease;
+            
+            &:hover {
+                // animation: etc...
+                g.char {
+                animation: move 1000ms infinite;
+                }
+            }
+        }
+    }
+}
+
+@keyframes move {
+    0% {
+        transform: scale(1) rotate(0deg);
+    }
+
+    35% {
+        transform: scale(1) rotate(20deg);
+        
+    }
+
+    60% {
+        transform: scale(.6) rotate(-200deg);
+    }
+
+    100% {
+        transform: scale(1) rotate(-360deg);
+    }
+}
